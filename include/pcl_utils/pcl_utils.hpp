@@ -18,11 +18,31 @@
 #include <pcl/segmentation/extract_clusters.h>
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/visualization/cloud_viewer.h>
+// Eigen
+#include <Eigen/Dense>
 
 namespace pcl_utils {
+  // transform
+  template <typename POINT_TYPE = pcl::PointXYZ>
+  pcl::PointCloud<POINT_TYPE> transform_cloud(const pcl::PointCloud<POINT_TYPE> &cloud,double x, double y, double z, double roll, double pitch, double yaw)
+  {
+    pcl::PointCloud<POINT_TYPE> output_cloud;
+    Eigen::Affine3f transformatoin = pcl::getTransformation(x, y, z, roll, pitch, yaw);
+    pcl::transformPointCloud<POINT_TYPE>(cloud, output_cloud, transformatoin);
+    return output_cloud;
+  }
+
+  template <typename POINT_TYPE = pcl::PointXYZ>
+  pcl::PointCloud<pcl::PointXYZRGBA> conversion_rgb_cloud(pcl::PointCloud<POINT_TYPE> cloud)
+  {
+    pcl::PointCloud<pcl::PointXYZRGBA> rgb_cloud;
+    copyPointCloud(cloud, rgb_cloud);
+    return rgb_cloud;
+  }
+
   // extract
   template <typename POINT_TYPE = pcl::PointXYZ>
-  inline pcl::PointCloud<POINT_TYPE> extract_pcl(const pcl::PointCloud<POINT_TYPE>& cloud, pcl::PointIndices::Ptr inliers,
+  inline pcl::PointCloud<POINT_TYPE> extract_cloud(const pcl::PointCloud<POINT_TYPE>& cloud, pcl::PointIndices::Ptr inliers,
                                                     bool negative = false) {
     pcl::PointCloud<POINT_TYPE> extrac_cloud;
     pcl::ExtractIndices<POINT_TYPE> extract;

@@ -105,7 +105,7 @@ class IterativeClosestPoint
       return converged;
     }
 
-    std::tuple<pcl::PointCloud<POINT_TYPE>,double,bool> transform_cloud(const pcl::PointCloud<POINT_TYPE> &source_cloud,const pcl::PointCloud<POINT_TYPE> &target_cloud)
+    std::tuple<pcl::PointCloud<POINT_TYPE>,double,bool> transform(const pcl::PointCloud<POINT_TYPE> &source_cloud,const pcl::PointCloud<POINT_TYPE> &target_cloud)
     {
       bool converged = false;
       double score = 0.0;

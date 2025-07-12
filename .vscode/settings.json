@@ -73,6 +73,14 @@
     "valarray": "cpp",
     "variant": "cpp",
     "core": "cpp",
-    "numericaldiff": "cpp"
+    "numericaldiff": "cpp",
+    "regex": "cpp",
+    "any": "cpp",
+    "codecvt": "cpp",
+    "coroutine": "cpp",
+    "source_location": "cpp",
+    "hash_map": "cpp",
+    "hash_set": "cpp",
+    "future": "cpp"
   }
 }
